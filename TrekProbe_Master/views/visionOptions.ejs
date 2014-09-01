@@ -1,0 +1,15 @@
+<td width="100">
+    <h3>HMD</h3>
+    <input data-bind="click: hmdOnOff" type="button" class="button" value="Off" id="hmdOnOff" >
+</td>
+<td width="100">
+    <div data-bind="visible: hmdIsOn">
+        <h3>Stereoscopic Vision</h3>
+        <input data-bind="click: stereoVisionOnOff" type="button" class="button" value="Off" id="stereoVisionOnOff" >
+    </div>
+
+    <div data-bind="visible: !hmdIsOn()">
+        <h3>Bidirectional Video (Telepresence)</h3>
+        <input data-bind="click: bidirVideoOnOff" type="button" class="button" value="Off" id="bidirVideoOnOff" >
+    </div>
+</td>

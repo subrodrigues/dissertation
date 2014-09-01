@@ -1,0 +1,43 @@
+<div class="connectedDroids" data-bind="visible: viewOptionsIsOn">
+    <table id="androidOpt" >
+        <thead>
+        <tr>
+            <th>
+                <li data-bind="click: refresh" style="width: 150px">
+                    <a href="#">Refresh Slaves</a>
+                </li>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <a> Droid Slave </a>
+            </td>
+            <td>
+                <a> Second Camera Droid </a>
+            </td>
+        </tr>
+        <tr>
+            <td data-bind="visible: slaveDroidIsOn">
+                <img id="androidoff" src="../images/androidon.png" width="50" height="50">
+            </td>
+            <td data-bind="visible: !slaveDroidIsOn()">
+                <img class="androidoff" src="../images/androidoff.png" width="50" height="50">
+            </td>
+            <td data-bind="visible: secondCameraDroidIsOn">
+                <img class="androidoff" src="../images/androidon.png" width="50" height="50">
+            </td>
+            <td data-bind="visible: !secondCameraDroidIsOn()">
+                <img class="androidoff" src="../images/androidoff.png" width="50" height="50">
+            </td>
+        </tr>
+    <!--    <tr>
+            <td data-bind="visible: slaveDroidIsOn">
+                <input type="text" value="press WASD to move" data-bind="event:{ keypress: sendMsgProtocol}" />
+            </td>
+        </tr>
+    -->    </tbody>
+
+    </table>
+</div>

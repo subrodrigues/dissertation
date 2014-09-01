@@ -1,0 +1,70 @@
+<div class="clickableCell" data-bind="visible: oculusViewOn">
+
+    <h2>Slave Streams</h2>
+
+    <!-- View for stream Unidirectional -->
+    <div data-bind="visible: viewHMDOnMono">
+        <table>
+            <thead>
+            <tr>
+                <th>Stream</th>
+                <th>Camera</th>
+                <th>Controls</th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: streams" >
+            <tr data-bind="visible: ($index() < 1)">
+                <td>
+                    <a data-bind="text: name"></a>
+                </td>
+                <td data-bind="css: { selected: isPlaying() }, click: $root.toggleRemoteVideo">
+                    <a>View</a>
+                </td>
+                <td data-bind="css: { selected: isPlaying() }">
+                    <input type="text" value="press WASD to move" data-bind="event:{ keypress: $root.sendMsgProtocol}" />
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <li data-bind="click: refresh" style="width: 240px">
+            <a href="#">refresh</a>
+        </li>
+        </br></br>
+        <a>Use WASD to move the droid</a>
+    </div>
+
+    <div data-bind="visible: viewHMDOnStereo">
+        <table>
+            <thead>
+            <tr>
+                <th>Stream</th>
+                <th>Camera</th>
+                <th>Controls</th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: streams" >
+            <tr>
+                <td>
+                    <a data-bind="text: name"></a>
+                </td>
+                <td data-bind="css: { selected: isPlaying() }, click: $root.toggleRemoteVideo">
+                    <a>View</a>
+                </td>
+                <td data-bind="css: { selected: isPlaying() }, visible: ($index() < 1)"> <!-- Controls only in Slave 1 (Brain) -->
+                    <input type="text" value="press WASD to move" data-bind="event:{ keypress: $root.sendMsgProtocol}" />
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <li data-bind="click: refresh" style="width: 240px">
+            <a href="#">refresh</a>
+        </li>
+        </br></br>
+        <a>Use WASD to move the droid</a>
+    </div>
+
+    <div id="oculusView" >
+    <div data-bind="visible: viewHMDOnMono" class="button" id="toggle-render" onclick="toggleRender(false)">toggle render mode</div>
+    <div data-bind="visible: viewHMDOnStereo" class="button" id="toggle-render2" onclick="toggleRender(true)">toggle render mode</div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<%= include indexTop %>
+    <%= include viewChanger %>
+
+    <h1><%= header %></h1>
+
+    <%= include viewOptions %>
+    <%= include viewHMDOff %>
+    <%= include viewHMDOn %>
+
+    <a id="logo" class="offline" href="https://github.com/Instrument/oculus-bridge"></a>
+
+    <%= include connectedDroids %>
+
+    <script>
+        // Init Client Manager
+        client = new ClientManager();
+
+        // Init Knockout View Model
+        vm = new TrekProbeViewModel(client, "/streams/");
+        ko.applyBindings(vm);
+
+        // Init Oculus Bridge
+        oculusBridgeRender = new OculusBridgeRender();
+
+        function toggleRender(stereoFlag){ // To turn Oculus Rift render On/Off
+            oculusBridgeRender.toggleRender(stereoFlag);
+        }
+    </script>
+
+<%= include indexBottom %>

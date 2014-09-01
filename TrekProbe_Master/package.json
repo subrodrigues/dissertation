@@ -1,0 +1,24 @@
+{
+    "name": "MasterTrekProbe",
+    "version": "0.0.1",
+    "scripts": {
+    "start": "node app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/subrodrigues/dissertation.git"
+    },
+    "dependencies": {
+    "express": "~4.2.0",
+    "serve-favicon": "~2.0.0",
+    "errorhandler": "~1.0.0",
+    "morgan": "~1.0.0",
+    "socket.io": "~0.9",
+    "cookie-parser": "~1.0.1",
+    "body-parser": "~1.0.0",
+    "debug": "~0.7.4",
+    "method-override": "~1.0.0",
+    "ejs": "~0.8.5",
+    "forever": "0.10.8"
+    }
+}

@@ -1,0 +1,8 @@
+<div id="viewChanger">
+    <div data-bind="visible: viewOptionsIsOn, click: viewOptionsOnOff" >
+        <img id="androidoff" src="../images/cameraview.png" width="50" height="50">
+    </div>
+    <div data-bind="visible: !viewOptionsIsOn(), click: viewOptionsOnOff" >
+        <img class="androidoff" src="../images/settings.png" width="50" height="50">
+    </div>
+</div>

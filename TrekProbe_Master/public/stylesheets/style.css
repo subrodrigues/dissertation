@@ -1,0 +1,163 @@
+body {
+    padding: 5px;
+    font-family: 'Strait', sans-serif;
+    background-color: #161616;
+    color: #fff;
+    margin: 0px;
+    overflow: hidden;
+    letter-spacing:1px;
+    font-size:13px;
+}
+h1{
+    text-align: center;
+}
+
+a {
+    color: #00b7ff;
+    text-decoration: none;
+}
+
+.button {
+    font: 'Strait', sans-serif;
+    cursor:pointer;
+    display:inline-block;
+    background:#404040;
+    padding:10px;
+    color:#a0a0a0;
+}
+
+.button:hover{
+    color:white;
+}
+
+#logo {
+    width:50px;
+    height:50px;
+    padding:10px;
+    position:absolute;
+    top:0px;
+    right:0px;
+    cursor:pointer;
+    background-color:rgba(0,0,0,0.4);
+    background-image:url(../images/oculus_bridge.png);
+    background-repeat:no-repeat;
+    background-position:10px 10px;
+}
+
+#logo.offline{
+    background-image:url(../images/oculus_bridge_offline.png);
+}
+
+#viewChanger {
+    width:50px;
+    height:50px;
+    padding:10px;
+    position:absolute;
+    top:0px;
+    left:0px;
+    cursor:pointer;
+    background-color:rgba(0,0,0,0.0);
+    background-repeat:no-repeat;
+    background-position:10px 10px;
+}
+#viewChanger:hover {
+    cursor: pointer;
+    background-color: #aaa;
+}
+
+#androidOpt{
+    position:absolute;
+    bottom:0px;
+    right:0px;
+    cursor:pointer;
+}
+
+
+table, tr, td, th {margin: 0;border: 0;padding: 5px;border-collapse: collapse;}
+
+li {
+    list-style-type: none;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 3px 3px 3px #888;
+    padding: 5px 5px 5px 5px;
+}
+
+li:hover {
+    cursor: pointer;
+    background-color: #aaa;
+}
+
+.options {
+    top: 15px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.localCam {
+    display: inline-block;
+    top: 15px;
+    right: 15px;
+    float: right;
+    position:absolute;
+    top:50px;
+    right:0px;
+}
+
+.localCam video {
+    border: 5px solid rgb(119, 119, 119);
+    outline: 0px none;
+    height: 240px;
+    width: 320px;
+}
+
+/*
+.remoteVideosContainer{
+    height: 360px;
+    width: 640px;
+}
+*/
+
+.clickableCell {
+    display: inline-block;
+    top: 15px;
+    right: 15px;
+    float: left;
+}
+
+.clickableCell table{
+    text-align: center;
+}
+
+.clickableCell td:hover {
+    cursor: pointer;
+    background-color: #aaa;
+}
+
+.clickableCell .selected {
+    background-color: #444 !important;
+    text-shadow:none;
+    border-right-color: #aaa;
+    border-left: none;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow:inset 1px 2px 6px #070707;
+}
+
+.connectedDroids{
+    display: inline-block;
+    top: 15px;
+    right: 15px;
+    float: left;
+}
+
+.connectedDroids table{
+    text-align: center;
+}
+
+
+.footer {
+    clear: both;
+    position: fixed;
+    bottom: 0
+}
