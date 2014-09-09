@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true" >
+
+<LinearLayout 
+    android:id="@+id/login_fragment"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:background="@drawable/r2d2blue"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/stream_settings"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dip"
+        android:text="@string/stream_settings"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/orange_title" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        
+	     <TextView
+			android:id="@+id/res_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dip"
+			android:layout_marginTop="10dip"
+			android:text="@string/cam_res"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:textColor="@color/orange_title" />
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+                
+                <TextView
+			        android:id="@+id/max_res_title"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="10dip"
+			        android:layout_marginTop="5dip"
+			        android:text="@string/max"
+			        android:textAppearance="?android:attr/textAppearanceSmall"
+			        android:textColor="@color/orange_title" />
+
+				    <Spinner
+					    android:id="@+id/max_res_spinner"
+					    android:layout_width="fill_parent"
+					    android:layout_height="wrap_content"
+					    android:textColor="@color/orange_select" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dip" >
+               <TextView
+			        android:id="@+id/min_res_title"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="10dip"
+			        android:layout_marginTop="5dip"
+			        android:text="@string/min"
+			        android:textAppearance="?android:attr/textAppearanceSmall"
+			        android:textColor="@color/orange_title" />
+
+				    <Spinner
+					    android:id="@+id/min_res_spinner"
+					    android:layout_width="fill_parent"
+					    android:layout_height="wrap_content"
+					    android:textColor="@color/orange_select" />
+        </TableRow>
+        
+      	<TextView
+	        android:id="@+id/fr_title"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="10dip"
+	        android:layout_marginTop="5dip"
+	        android:text="@string/frame_rate"
+	        android:textAppearance="?android:attr/textAppearanceMedium"
+	        android:textColor="@color/orange_title" />
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+				    
+   		       	<TextView
+		        android:id="@+id/max_fr_title"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="10dip"
+		        android:layout_marginTop="5dip"
+		        android:text="@string/max"
+		        android:textAppearance="?android:attr/textAppearanceSmall"
+		        android:textColor="@color/orange_title" />
+		
+		    <EditText
+		        android:id="@+id/max_fr"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="10dip"
+		        android:layout_marginRight="10dip"
+		        android:inputType="number"
+		        android:text="0"
+		        android:textColor="@color/orange_select" >
+		    </EditText>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dip" >
+		    <TextView
+		        android:id="@+id/min_fr_title"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="10dip"
+		        android:layout_marginTop="5dip"
+		        android:text="@string/min"
+		        android:textAppearance="?android:attr/textAppearanceSmall"
+		        android:textColor="@color/orange_title" />
+		
+		    <EditText
+		        android:id="@+id/min_fr"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="10dip"
+		        android:layout_marginRight="10dip"
+		        android:inputType="number"
+		        android:text="0"
+		        android:textColor="@color/orange_select" >
+		    </EditText>
+        </TableRow>
+        
+        <TextView
+		        android:id="@+id/aspect_ratio_title"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="10dip"
+		        android:layout_marginTop="5dip"
+		        android:text="@string/aspect_ratio"
+		        android:textAppearance="?android:attr/textAppearanceMedium"
+		        android:textColor="@color/orange_title" />
+        
+        <TableRow
+            android:id="@+id/tableRow5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+		    
+		        <TextView
+			        android:id="@+id/max_aspect_ratio_title"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="10dip"
+			        android:layout_marginTop="5dip"
+			        android:text="@string/max"
+			        android:textAppearance="?android:attr/textAppearanceSmall"
+			        android:textColor="@color/orange_title" />
+    
+    		    <EditText
+			        android:id="@+id/max_ar"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="10dip"
+			        android:layout_marginRight="10dip"
+			        android:inputType="numberDecimal|numberSigned"
+			        android:text="0"
+			        android:textColor="@color/orange_select" >
+			    </EditText>
+       	</TableRow>
+       	
+        <TableRow
+            android:id="@+id/tableRow6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dip" >
+			    
+		     	<TextView
+			        android:id="@+id/min_aspect_ratio_title"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="10dip"
+			        android:layout_marginTop="5dip"
+			        android:text="@string/min"
+			        android:textAppearance="?android:attr/textAppearanceSmall"
+			        android:textColor="@color/orange_title" />
+			
+    		    <EditText
+			        android:id="@+id/min_ar"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="10dip"
+			        android:layout_marginRight="10dip"
+			        android:inputType="numberDecimal|numberSigned"
+			        android:text="0"
+			        android:textColor="@color/orange_select" >
+			    </EditText>
+       	</TableRow>
+            
+    </TableLayout>
+
+    <Switch
+        android:id="@+id/switch_audio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginBottom="15dip"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/orange_title"
+        android:text="@string/audio" />
+    
+    <Switch
+        android:id="@+id/switch_local_stream"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginBottom="15dip"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/orange_title"
+        android:text="@string/local_stream" />
+    
+    <Switch
+        android:id="@+id/switch_remote_fs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginBottom="15dip"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/orange_title"
+        android:text="@string/remote_stream" />
+    
+
+    <Button
+        android:id="@+id/applyStream"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="20dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginBottom="10dip"
+        android:background="@drawable/button_login"
+        android:text="@string/apply"
+        android:textColor="#ffffff"
+        android:onClick="onClickApplyStream"
+        android:textSize="@dimen/button_size" />
+
+
+</LinearLayout>
+</ScrollView>

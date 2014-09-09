@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/login_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/r2d2blue"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/server_settings"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="@string/server_settings"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/orange_title" />
+
+    <TextView
+        android:id="@+id/ip_address_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="10dip"
+        android:text="@string/ip_title"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/orange_title" />
+
+    <EditText
+        android:id="@+id/ip_address"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:inputType="textPhonetic"
+        android:hint="@string/host"
+        android:textColor="@color/orange_select" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/port_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="10dip"
+        android:text="@string/port_title"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/orange_title" />
+
+    <EditText
+        android:id="@+id/port"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:inputType="number"
+        android:hint="@string/port"
+        android:textColor="@color/orange_select" >
+    </EditText>
+
+    <Button
+        android:id="@+id/apply"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="20dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginBottom="10dip"
+        android:background="@drawable/button_login"
+        android:text="@string/apply"
+        android:textColor="#ffffff"
+        android:onClick="onClickApplyServer"
+        android:textSize="@dimen/button_size" />
+
+
+</LinearLayout>
