@@ -9,6 +9,7 @@ import org.webrtc.VideoRenderer;
 
 import com.trekprobe.connection.VideoStreamsView;
 import com.trekprobe.connection.WebRtcClient;
+import com.trekprobe.models.StreamSettings;
 import com.trekprobe.variables.Variables;
 
 import android.app.Activity;
@@ -18,6 +19,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Point;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -33,13 +35,16 @@ public class StreamActivity extends Activity implements WebRtcClient.RTCListener
 	private String callerId;
 	
 	private AlertDialog backMsg = null;
+	
+	private StreamSettings streamSettings = null;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
+				
 		mSocketAddress = "http://" + Variables.ipAddress;
 		mSocketAddress += (":"+Variables.port+"/");
 
@@ -61,8 +66,25 @@ public class StreamActivity extends Activity implements WebRtcClient.RTCListener
 		
 		backMsg = makeBackMsg("Do you really want to stop streaming?").create();
 		
-		startCam();
+		new LoadSettingsAndStartCam().execute();
+
 	}
+	
+	private class LoadSettingsAndStartCam extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			Bundle extras = getIntent().getExtras();
+		//	streamSettings = new StreamSettings();
+			streamSettings = extras.getParcelable("Settings");
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			startCam();
+		}
+	}	
 	
 	public void onConfigurationChanged(Configuration newConfig)
 	{
@@ -123,9 +145,16 @@ public class StreamActivity extends Activity implements WebRtcClient.RTCListener
 	public void startCam() {
 		setContentView(vsv);
 		
+		String[] resolutions = getResources().getStringArray(R.array.res_array);
+		
+		String maxRes = resolutions[streamSettings.getMaxResIndex()];
+		String minRes = resolutions[streamSettings.getMinResIndex()];
 		
 		// Camera settings
-		client.setCamera(Variables.CAMERA_FACING, "480", "640");
+	//	client.setCamera(Variables.CAMERA_FACING, "480", "640");
+		client.setCameraConstraints(Variables.CAMERA_FACING, maxRes, minRes, streamSettings.getMaxFramerate(),
+				streamSettings.getMinFramerate(), streamSettings.getMaxAspectRatio(), 
+				streamSettings.getMinAspectRatio(), streamSettings.getStreamAudio()); 
 		client.start(Variables.droidName, false); // SlaveTrekProbe SecondCameraTrekProbe
 	}
 

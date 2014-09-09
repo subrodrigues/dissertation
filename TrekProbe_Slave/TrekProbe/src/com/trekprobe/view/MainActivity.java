@@ -79,102 +79,15 @@ public class MainActivity extends ActionBarActivity implements
 			
 			setStreamSettings(new StreamSettings(maxResIndex, minResIndex, maxFramerate, minFramerate,
 					maxAspectRatio, minAspectRatio, streamAudio, streamLocalVideo, showRemoteFullScreen));
+			
+			Variables.ipAddress = mPreferences.getString("ipAddress", "192.168.1.5");
+			Variables.port = mPreferences.getString("port", "3000");
 		}
 	}
-	
-	private class LoadSettings extends AsyncTask<Void, Void, Void> {
 
-		@Override
-		protected Void doInBackground(Void... params) {
-			loadSettings();
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			// TODO
-		}
-	}	
-	
-	private void clearSettingsPreferences() {
-		SharedPreferences mPreferences = getSharedPreferences("Current User", MODE_PRIVATE);
-		SharedPreferences.Editor editor = mPreferences.edit();
-		editor.clear();
-		editor.commit();
-	}
-	
-	public void onClickApplyStream(View v){
-		// TODO: Apply Stream Options		
-	//	TextView maxResView = (TextView)((Spinner)findViewById(R.id.max_res_spinner)).getSelectedView();
-	//	String maxRes = maxResView.getText().toString();
-		
-	//	String maxRes = ((Spinner)v.findViewById(R.id.max_res_spinner)).getSelectedItem().toString();
-	//	TextView minResView = (TextView)((Spinner)findViewById(R.id.min_res_spinner)).getSelectedView();
-
-	//	String minRes = minResView.getText().toString();
-		int maxResInd = ((Spinner)findViewById(R.id.max_res_spinner)).getSelectedItemPosition();
-		int minResInd = ((Spinner)findViewById(R.id.min_res_spinner)).getSelectedItemPosition();
-		
-		String maxFrameRate = ((EditText)findViewById(R.id.max_fr)).getText().toString();
-		String minFrameRate = ((EditText)findViewById(R.id.min_fr)).getText().toString();
-		
-		String maxAspectRatio = ((EditText)findViewById(R.id.max_ar)).getText().toString();
-		String minAspectRatio = ((EditText)findViewById(R.id.min_ar)).getText().toString();
-		
-		Switch audioSW = ((Switch)findViewById(R.id.switch_audio));
-		int audio = 1;
-		if(!audioSW.isChecked())
-			audio = 0;
-		
-		Switch localStream = ((Switch)findViewById(R.id.switch_local_stream));
-		int showLocalStream = 1;
-		if(!localStream.isChecked())
-			showLocalStream = 0;
-		
-		Switch remoteInFS = ((Switch)findViewById(R.id.switch_remote_fs));
-		int showRemoteFS = 0;
-		if(remoteInFS.isChecked())
-			showRemoteFS = 1;
-		
-		// Insert into model
-		streamSettings.setMaxResIndex(maxResInd);
-		streamSettings.setMinResIndex(minResInd);
-		
-		getStreamSettings().setMaxFramerate(maxFrameRate);
-		getStreamSettings().setMinFramerate(minFrameRate);
-		
-		getStreamSettings().setMaxAspectRatio(maxAspectRatio);
-		getStreamSettings().setMinAspectRatio(minAspectRatio);
-		
-		getStreamSettings().setStreamAudio(audio);
-		getStreamSettings().setStreamLocalVideo(showLocalStream);
-		getStreamSettings().setShowRemoteFullScreen(showRemoteFS);
-		
-		saveSettings();
-	}
-	
-	private void saveSettings() {
-		SharedPreferences mPreferences = getSharedPreferences("Current User", MODE_PRIVATE);
-		SharedPreferences.Editor editor = mPreferences.edit();
-		
-		editor.putInt("maxResIndex", getStreamSettings().getMaxResIndex());
-		editor.putInt("minResIndex", getStreamSettings().getMinResIndex());
-		
-		editor.putString("maxFramerate", getStreamSettings().getMaxFramerate());
-		editor.putString("minFramerate", getStreamSettings().getMinFramerate());
-		
-		editor.putString("maxAspectRatio", getStreamSettings().getMaxAspectRatio());
-		editor.putString("minAspectRatio", getStreamSettings().getMinAspectRatio());
-		
-		editor.putInt("streamAudio", getStreamSettings().getStreamAudio());
-		editor.putInt("streamLocalVideo", getStreamSettings().getStreamLocalVideo());
-		editor.putInt("showRemoteFullScreen", getStreamSettings().getShowRemoteFullScreen());
-
-		editor.commit();
-	}
-	
 	public void onClickStart(View v){
 		Intent startCamIntent = new Intent(this, StreamActivity.class);
+		startCamIntent.putExtra("Settings", this.streamSettings);
 		startActivityForResult(startCamIntent, 0);
 	}
 	
@@ -182,6 +95,8 @@ public class MainActivity extends ActionBarActivity implements
 		// Apply Server Options
 		Variables.ipAddress = ((EditText)findViewById(R.id.ip_address)).getText().toString();
 		Variables.port = ((EditText)findViewById(R.id.port)).getText().toString();
+		
+		saveServer();
 	}
 
 	@Override
@@ -298,5 +213,99 @@ public class MainActivity extends ActionBarActivity implements
 		}
 */
 	}
+	
+	private class LoadSettings extends AsyncTask<Void, Void, Void> {
 
+		@Override
+		protected Void doInBackground(Void... params) {
+			loadSettings();
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO
+		}
+	}	
+	
+	private void clearSettingsPreferences() {
+		SharedPreferences mPreferences = getSharedPreferences("Current User", MODE_PRIVATE);
+		SharedPreferences.Editor editor = mPreferences.edit();
+		editor.clear();
+		editor.commit();
+	}
+	
+	public void onClickApplyStream(View v){
+		// Apply Stream Options		
+		int maxResInd = ((Spinner)findViewById(R.id.max_res_spinner)).getSelectedItemPosition();
+		int minResInd = ((Spinner)findViewById(R.id.min_res_spinner)).getSelectedItemPosition();
+		
+		String maxFrameRate = ((EditText)findViewById(R.id.max_fr)).getText().toString();
+		String minFrameRate = ((EditText)findViewById(R.id.min_fr)).getText().toString();
+		
+		String maxAspectRatio = ((EditText)findViewById(R.id.max_ar)).getText().toString();
+		String minAspectRatio = ((EditText)findViewById(R.id.min_ar)).getText().toString();
+		
+		Switch audioSW = ((Switch)findViewById(R.id.switch_audio));
+		int audio = 1;
+		if(!audioSW.isChecked())
+			audio = 0;
+		
+		Switch localStream = ((Switch)findViewById(R.id.switch_local_stream));
+		int showLocalStream = 1;
+		if(!localStream.isChecked())
+			showLocalStream = 0;
+		
+		Switch remoteInFS = ((Switch)findViewById(R.id.switch_remote_fs));
+		int showRemoteFS = 0;
+		if(remoteInFS.isChecked())
+			showRemoteFS = 1;
+		
+		// Insert into model
+		streamSettings.setMaxResIndex(maxResInd);
+		streamSettings.setMinResIndex(minResInd);
+		
+		getStreamSettings().setMaxFramerate(maxFrameRate);
+		getStreamSettings().setMinFramerate(minFrameRate);
+		
+		getStreamSettings().setMaxAspectRatio(maxAspectRatio);
+		getStreamSettings().setMinAspectRatio(minAspectRatio);
+		
+		getStreamSettings().setStreamAudio(audio);
+		getStreamSettings().setStreamLocalVideo(showLocalStream);
+		getStreamSettings().setShowRemoteFullScreen(showRemoteFS);
+		
+		saveSettings();
+	}
+	
+	private void saveSettings() {
+		SharedPreferences mPreferences = getSharedPreferences("Current User", MODE_PRIVATE);
+		SharedPreferences.Editor editor = mPreferences.edit();
+		
+		editor.putInt("maxResIndex", getStreamSettings().getMaxResIndex());
+		editor.putInt("minResIndex", getStreamSettings().getMinResIndex());
+		
+		editor.putString("maxFramerate", getStreamSettings().getMaxFramerate());
+		editor.putString("minFramerate", getStreamSettings().getMinFramerate());
+		
+		editor.putString("maxAspectRatio", getStreamSettings().getMaxAspectRatio());
+		editor.putString("minAspectRatio", getStreamSettings().getMinAspectRatio());
+		
+		editor.putInt("streamAudio", getStreamSettings().getStreamAudio());
+		editor.putInt("streamLocalVideo", getStreamSettings().getStreamLocalVideo());
+		editor.putInt("showRemoteFullScreen", getStreamSettings().getShowRemoteFullScreen());
+
+		editor.commit();
+	}
+	
+	private void saveServer() {
+		SharedPreferences mPreferences = getSharedPreferences("Current User", MODE_PRIVATE);
+		SharedPreferences.Editor editor = mPreferences.edit();
+		
+		editor.putString("ipAddress", Variables.ipAddress);
+		editor.putString("port", Variables.port);
+
+		editor.commit();
+	}
+	
 }

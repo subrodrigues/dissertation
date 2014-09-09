@@ -27,6 +27,7 @@ import com.koushikdutta.async.http.socketio.Acknowledge;
 import com.koushikdutta.async.http.socketio.ConnectCallback;
 import com.koushikdutta.async.http.socketio.EventCallback;
 import com.koushikdutta.async.http.socketio.SocketIOClient;
+import com.trekprobe.models.StreamSettings;
 import com.trekprobe.variables.Variables;
 import com.trekprobe.view.R;
 
@@ -42,7 +43,7 @@ public class WebRtcClient {
 	private SocketIOClient client;
 	private final MessageHandler messageHandler = new MessageHandler();
 	private final static String TAG = WebRtcClient.class.getCanonicalName();
-	
+		
 	// Sound
 	SoundPool soundPool;
 	
@@ -309,6 +310,44 @@ public class WebRtcClient {
 		videoConstraints.mandatory.add(new MediaConstraints.KeyValuePair("minWidth", width));
 
 		VideoSource videoSource = factory.createVideoSource(getVideoCapturer(cameraFacing), videoConstraints);
+		lMS = factory.createLocalMediaStream("ARDAMS");
+		lMS.addTrack(factory.createVideoTrack("ARDAMSv0", videoSource));
+		lMS.addTrack(factory.createAudioTrack("ARDAMSa0"));
+
+		mListener.onLocalStream(lMS);
+	}
+	
+	public void setCameraConstraints(String cameraFacing, String maxRes, String minRes, String maxFramerate, String minFramerate,
+			String maxAspectRatio, String minAspectRatio, int streamAudio){
+		
+		String[] maxResParts = maxRes.split("x");
+		String[] minResParts = minRes.split("x");
+		
+		MediaConstraints mediaConstraints = new MediaConstraints();
+		
+		mediaConstraints.mandatory.add(new MediaConstraints.KeyValuePair("maxHeight", maxResParts[1]));
+		mediaConstraints.mandatory.add(new MediaConstraints.KeyValuePair("maxWidth", maxResParts[0]));
+		mediaConstraints.mandatory.add(new MediaConstraints.KeyValuePair("minHeight", minResParts[1]));
+		mediaConstraints.mandatory.add(new MediaConstraints.KeyValuePair("minWidth", minResParts[0]));
+		
+		if(!maxFramerate.equals("0")){
+			mediaConstraints.mandatory.add(new MediaConstraints.KeyValuePair("maxFrameRate", maxFramerate));
+		}
+		if(!minFramerate.equals("0")){
+			mediaConstraints.mandatory.add(new MediaConstraints.KeyValuePair("minFrameRate", minFramerate));
+		}
+		if(!maxAspectRatio.equals("0")){
+			mediaConstraints.mandatory.add(new MediaConstraints.KeyValuePair("maxAspectRatio", maxAspectRatio));
+		}
+		if(!minAspectRatio.equals("0")){
+			mediaConstraints.mandatory.add(new MediaConstraints.KeyValuePair("minAspectRatio", minAspectRatio));
+		}
+		
+		if(streamAudio == 0){
+			mediaConstraints.mandatory.add(new MediaConstraints.KeyValuePair("audio", "false"));
+		}
+
+		VideoSource videoSource = factory.createVideoSource(getVideoCapturer(cameraFacing), mediaConstraints);
 		lMS = factory.createLocalMediaStream("ARDAMS");
 		lMS.addTrack(factory.createVideoTrack("ARDAMSv0", videoSource));
 		lMS.addTrack(factory.createAudioTrack("ARDAMSa0"));
